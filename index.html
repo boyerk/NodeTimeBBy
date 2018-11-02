@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Socket.IO Test</title>
+</head>
+
+<body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+    var socket = io();
+    socket.on('newData', function(msg) {
+        var p = document.createElement('p');
+        p.innerText = msg;
+        document.body.appendChild(p);
+    });
+    </script>
+</body>
+
+</html>

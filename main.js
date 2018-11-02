@@ -4,7 +4,7 @@ var hostname = "127.0.0.1";
 var port = 3000;
 var app = require('express')();
 var server = http.Server(app);
-
+var io = require('socket.io')(server);
 
 var dataObject = {
     "status": "OK",
@@ -38,9 +38,31 @@ app.get('/createStory/:name1/:name2/:word3/:place4/:thing5', function(req, res) 
         "word3": word3,
         "place4": place4,
         "thing5": thing5,
-        "result": name1 + " " + name2 + "son, From the house of " + word3 + "." + " Who lives in the land of " + place4 + " and he travelled far and wide searching for a " + thing5 + "!"
+        "result": name1 + " " + name2 + "son, From the house of " + word3 + "." + " Who lives in the land of " + place4 + " Has travelled far and wide searching for a " + thing5 + "!"
     }
     res.send(responseData);
+});
+app.get('/socketTest', function(req, res) {
+    res.sendFile(__dirname + '/index.html');
+});
+app.get('/trigger', function(req, res) {
+    sendToAll();
+    res.send("OK");
+});
+
+function sendToAll() {
+    io.emit('newData', "Hello");
+}
+///////////////////////////////////////////////////////////////////
+io.on('connection', function(socket) {
+    console.log('A user has joined your channel');
+    socket.on('disconnect', function() {
+        console.log('A user has left your channel');
+
+    });
+    socket.on('positionUpdate', function() {
+        console.log(msg);
+    });
 });
 // var server = http.Server(function90(req, res) {
 //     res.end("Hello Bois I am Here For u")
