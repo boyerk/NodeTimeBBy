@@ -38,7 +38,7 @@ app.get('/createStory/:name1/:name2/:word3/:place4/:thing5', function(req, res) 
         "word3": word3,
         "place4": place4,
         "thing5": thing5,
-        "result": name1 + " " + name2 + "son, From the house of " + word3 + "." + " Who lives in the land of " + place4 + " Has travelled far and wide searching for a " + thing5 + "!"
+        "result": name1 + " " + name2 + "son, From the house of " + word3 + "." + "\nWho lives in the land of " + place4 + "." + "\nHas travelled far and wide searching for \na " + thing5 + "!"
     }
     res.send(responseData);
 });
